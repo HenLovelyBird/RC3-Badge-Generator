@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>RC3-Badge-Generator</title>
+
+    <link rel="stylesheet" href="style.css">
+
+    <script src="node_modules/lodash/lodash.min.js"></script>
+    <script src="node_modules/simplex-noise/simplex-noise.js"></script>
+    <script src="node_modules/opentype.js/dist/opentype.js"></script>
+    <script src="node_modules/paper/dist/paper-full.min.js"></script>
+    <script src="index.js"></script>
+</head>
+
+<body>
+    <header>
+        <form class="menu" id="grid-container">
+
+            <!-- text input area -->
+            <div class="stagecontent">
+                <input type="text" id="simulationtext" placeholder="your text (16 char max)" autocomplete="off"
+                    oninput="setText(this.value)"></input>
+            </div>
+            <!-- /text input area -->
+
+            <!-- background: set giant pixel -->
+            <div class="stagecontent">
+                <input type="radio" id="col1" name="radio-group" value="0" onchange="setColor(this.value)"
+                    checked="checked" autocomplete="off">
+                <label for="col1"></label>
+            </div>
+
+            <div class="stagecontent" id="col2stage">
+                <input type="radio" id="col2" name="radio-group" value="1" onchange="setColor(this.value)"
+                    autocomplete="off">
+                <label for="col2"></label>
+            </div>
+
+            <div class="stagecontent" id="col3stage">
+                <input type="radio" id="col3" name="radio-group" value="2" onchange="setColor(this.value)"
+                    autocomplete="off">
+                <label for="col3"></label>
+            </div>
+
+            <div class="stagecontent" id="col4stage">
+                <input type="radio" id="col4" name="radio-group" value="3" onchange="setColor(this.value)"
+                    autocomplete="off">
+                <label for="col4"></label>
+            </div>
+
+            <div class="stagecontent" id="col5stage">
+                <input type="radio" id="col5" name="radio-group" value="4" onchange="setColor(this.value)"
+                    autocomplete="off">
+                <label for="col5"></label>
+            </div>
+            <div class="stagecontent" id="col6stage">
+                <input type="radio" id="col6" name="radio-group" value="5" onchange="setColor(this.value)"
+                    autocomplete="off">
+                <label for="col6"></label>
+            </div>
+            <div class="stagecontent" id="col7stage">
+                <input type="radio" id="col7" name="radio-group" value="6" onchange="setColor(this.value)"
+                    autocomplete="off">
+                <label for="col7"></label>
+            </div>
+            <div class="stagecontent" id="col8stage">
+                <input type="radio" id="col8" name="radio-group" value="7" onchange="setColor(this.value)"
+                    autocomplete="off">
+                <label for="col8"></label>
+            </div>
+            <!-- /background: set giant pixel -->
+
+            <!-- download-btns -->
+            <div class="stagecontent">
+                <button type="button" onclick="downloadPNG()">save PNG</button>
+            </div>
+
+            <div class="stagecontent">
+                <button type="button" onclick="downloadSVG()">save SVG</button>
+            </div>
+            <!-- /download-btns -->
+        </form>
+    </header>
+
+    <main>
+        <!-- stage content -->
+
+
+        <!-- left side: white overlay templates-->
+        <div id="templates">
+            <h3>Templates:</h3>
+        </div>
+        <!-- /left side: white overlay templates-->
+
+        <canvas id="paperCanvas" resize="true"></canvas>
+
+        <div id="help">
+            <div id="helpcontent">
+                <p>Expert Interactions:</p>
+                <ul>
+                    <li>Click in the canvas to make your own pattern and modify the pixel.</li>
+                    <li>Click somewhere else for a template pattern.</li>
+                    <li>Drag text/box to change parallax offset.</li>
+                </ul>
+            </div>
+            <button id="helpbutton">?</button>
+        </div>
+        <!-- /stagecontent -->
+    </main>
+
+    <footer>
+        <div id="infobox">
+            <a href="https://twitter.com/Bleeptrack">mod by Hen/i via @bleeptrack</a>
+            <a href="https://github.com/bleeptrack/rc3-badge-generator">Code on Github</a>
+        </div>
+    </footer>
+</body>
+
+</html>

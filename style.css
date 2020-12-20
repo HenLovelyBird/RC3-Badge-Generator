@@ -1,0 +1,238 @@
+@font-face {
+  font-family: Orbitron, sans-serif;
+  src: url(Orbitron-Black.ttf);
+}
+
+html,
+body {
+  margin: 0;
+  color: #d0d0ce;
+  height: 100%;
+}
+
+body {
+  background-color: black;
+}
+
+h3 {
+  color: #b239ff;
+}
+
+[type="radio"]:checked,
+[type="radio"]:not(:checked) {
+  position: absolute;
+  left: -9999px;
+}
+[type="radio"]:checked + label,
+[type="radio"]:not(:checked) + label {
+  position: relative;
+  padding-left: 28px;
+  cursor: pointer;
+  line-height: 20px;
+  display: inline-block;
+  color: blue;
+}
+[type="radio"]:checked + label:before,
+[type="radio"]:not(:checked) + label:before {
+  content: "";
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 3vw;
+  height: 3vw;
+}
+[type="radio"]:checked + label:after,
+[type="radio"]:not(:checked) + label:after {
+  content: "";
+  width: 3vw;
+  height: 3vw;
+
+  position: absolute;
+  top: 2px;
+  left: 2px;
+  -webkit-transition: all 0.2s ease;
+  transition: all 0.2s ease;
+}
+#col1:checked + label:before,
+#col1:not(:checked) + label:before {
+  border: 2px solid #b239ff;
+}
+#col2:checked + label:before,
+#col2:not(:checked) + label:before {
+  border: 2px solid #6800e7;
+}
+#col3:checked + label:before,
+#col3:not(:checked) + label:before {
+  border: 2px solid #05b9ec;
+}
+#col4:checked + label:before,
+#col4:not(:checked) + label:before {
+  border: 2px solid #02fae0;
+}
+#col5:checked + label:before,
+#col5:not(:checked) + label:before {
+  border: 2px solid #0227fa;
+}
+#col6:checked + label:before,
+#col6:not(:checked) + label:before {
+  border: 2px solid #e502fa;
+}
+#col7:checked + label:before,
+#col7:not(:checked) + label:before {
+  border: 2px solid #fafa02;
+}
+#col8:checked + label:before,
+#col8:not(:checked) + label:before {
+  border: 2px solid #fa3c02;
+}
+
+#col1 + label:after {
+  background: #b239ff;
+}
+#col2 + label:after {
+  background: #6800e7;
+}
+#col3 + label:after {
+  background: #05b9ec;
+}
+#col4 + label:after {
+  background: #02fae0;
+}
+#col5 + label:after {
+  background: #0227fa;
+}
+#col6 + label:after {
+  background: #e502fa;
+}
+#col7 + label:after {
+  background: #fafa02;
+}
+#col8 + label:after {
+  background: #fa3c02;
+}
+
+[type="radio"]:not(:checked) + label:after {
+  opacity: 0;
+  -webkit-transform: scale(0);
+  transform: scale(0);
+}
+[type="radio"]:checked + label:after {
+  opacity: 1;
+  -webkit-transform: scale(1);
+  transform: scale(1);
+}
+
+#col2stage,
+#col3stage,
+#col4stage {
+  margin-left: 2vw;
+}
+
+#col4stage {
+  margin-right: 2.8vw;
+}
+
+#infobox {
+  position: fixed;
+  bottom: 5px;
+  right: 5px;
+  color: #6800e7;
+}
+
+#infobox > a {
+  color: #6800e7;
+  font-family: sans-serif;
+  font-size: 1vw;
+  text-decoration: none;
+}
+
+#infobox > a:hover {
+  color: #05b9ec;
+}
+
+/* Scale canvas with resize attribute to full size */
+canvas[resize] {
+  width: 100%;
+  height: 99%;
+}
+
+.menu {
+  position: fixed;
+  top: 0px;
+  display: flex;
+  width: 100%;
+}
+
+#help {
+  font-family: Orbitron, sans-serif;
+  position: fixed;
+  bottom: 0px;
+  margin: 20px;
+}
+
+#helpcontent {
+  visibility: hidden;
+}
+
+.stagecontent {
+  height: calc(100% - 2.5em);
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  margin: 1vw;
+}
+
+textarea,
+input[type="text"] {
+  font-size: 2vw;
+  border: none;
+  color: #b239ff;
+  font-family: sans-serif;
+  padding: 5px;
+  background-color: transparent;
+  border: 2px solid #b239ff;
+  height: calc(3vw - 10px);
+}
+
+button {
+  display: block;
+  /*height: 40px;*/
+  line-height: 3vw;
+  font-size: 2vw;
+  font-family: "Orbitron", sans-serif;
+  text-decoration: none;
+  color: #b239ff;
+  border: 2px solid #b239ff;
+  letter-spacing: 2px;
+  text-align: center;
+  position: relative;
+  transition: all 0.35s;
+  padding-left: 1.5em;
+  padding-right: 1.5em;
+  background-color: transparent;
+}
+
+button:hover {
+  color: #006699;
+  border: 2px solid #006699;
+}
+
+#templates {
+  position: fixed;
+  left: 20px;
+  top: 10%;
+  max-height: 70%;
+}
+
+.template {
+  width: 60px;
+  height: 60px;
+  border: 1px solid white;
+  margin: 3px;
+}
+
+.pixel {
+  width: 10px;
+  height: 10px;
+  float: left;
+}
