@@ -16,6 +16,20 @@ let templates;
 let templatesJSON;
 let indicator;
 
+//write templates with only white pixels
+//populate the canvas foreground with those templates on selction
+//give the ability to write in various shades of white, their own design
+
+//when clicking the colored pixels, set background rect in that color
+
+//fix the edges of the white frame within the canvas
+
+// things that broke and need to be fixed:
+// templates (do not show up)
+// canvas is too high
+// text no longer shows up
+// changes do not render with server...clear cache everytime or?
+
 window.onload = function () {
   paper.setup("paperCanvas");
 
