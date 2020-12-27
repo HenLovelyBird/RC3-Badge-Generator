@@ -1,6 +1,7 @@
 paper.install(window);
 
 const colors = [
+  ["black", "white"],
   ["black", "#240038", "#440069", "#670295", "#B239FF"],
   ["black", "#12002F", "#2A005E", "#41008B", "#6800E7"],
   ["black", "#002A3A", "#025D84", "#0076A9", "#05B9EC"],
@@ -10,7 +11,7 @@ const pixelSize = 100;
 let currentColor = 0;
 let pixels;
 let overlay;
-let textContent = "ASSEMBLYXXXXXXXX";
+let textContent = "ASSEMBLY XXXXXXX";
 let dragging = false;
 let templates;
 let templatesJSON;
@@ -22,13 +23,7 @@ let indicator;
 
 //when clicking the colored pixels, set background rect in that color
 
-//fix the edges of the white frame within the canvas
-
-// things that broke and need to be fixed:
-// templates (do not show up)
-// canvas is too high
-// text no longer shows up
-// changes do not render with server...clear cache everytime or?
+// change font size so more can fit for assemblies
 
 window.onload = function () {
   paper.setup("paperCanvas");
@@ -44,10 +39,9 @@ window.onload = function () {
   };
 
   //generation process
-  initPixels();
-  simplexPixels();
-  generateOverlay();
-  setText("ASSEMBLYXXXXXXX");
+  //   initPixels();
+  //   simplexPixels();
+  setText("ASSEMBLY X");
 
   view.onClick = function (event) {
     simplexPixels();
@@ -59,6 +53,8 @@ window.onload = function () {
   templates = document.getElementById("templates");
 
   loadTemplates();
+
+  generateOverlay();
 };
 
 //load templates from json
@@ -114,10 +110,12 @@ function setText(text) {
     }
 
     //remove old text if it exists
-    if (overlay.children[1]) {
-      overlay.children[1].remove();
-      overlay.removeChildren(1);
+    // TODO remove the previous text without doing this random indec deletion
+    if (overlay.children[2]) {
+      overlay.children[2].remove();
+      overlay.removeChildren(2);
     }
+    console.log(overlay.children);
 
     //prepare text input
     textContent = text;
@@ -127,19 +125,23 @@ function setText(text) {
     //iterate through letters and set in grid
     let allLetters = new Group();
     for (let i = 0; i < text.length; i++) {
-      let fontPath = font.getPath(text[i], 0, 0, 150);
+      let fontPath = font.getPath(text[i], 0, 0, 60);
       let paperPath = paper.project.importSVG(fontPath.toSVG());
       let glyphOffset = paperPath.bounds.bottomCenter.y;
       paperPath.fillColor = "white";
       paperPath.strokeColor = null;
+      let letterSpacing = 50;
+      let maxLineLength = 12;
       paperPath.bounds.bottomCenter = new Point(
-        300 + (4 - (i % 4)) * 117,
-        300 + (4 - Math.floor(i / 4)) * 117
+        100 + (maxLineLength - (i % maxLineLength)) * letterSpacing,
+        100,
+        100 + (maxLineLength - Math.floor(i / maxLineLength)) * letterSpacing,
+        100
       );
       paperPath.position.y += glyphOffset;
-      if (i >= 4) {
+      if (i >= maxLineLength) {
         //special case for umlauts
-        let letterBelow = allLetters.children[i - 4];
+        let letterBelow = allLetters.children[i - maxLineLength];
         if (
           letterBelow._class == "CompoundPath" &&
           letterBelow.intersects(paperPath)
@@ -172,10 +174,17 @@ function setText(text) {
 
 //generate white box
 function generateOverlay() {
-  if (overlay) {
-    overlay.removeChildren();
-  }
+  //   if (overlay) {
+  //     overlay.removeChildren();
+  //   }
   overlay = new Group();
+
+  let bgRect = new Path.Rectangle(
+    [200 + pixelSize * 1, 200 + pixelSize * 1],
+    [pixelSize * 6, pixelSize * 6]
+  );
+  bgRect.fillColor = "#b239ff";
+  overlay.addChild(bgRect);
 
   let lineRect = new Path.Rectangle([200, 200], [pixelSize * 6, pixelSize * 6]);
   lineRect.strokeWidth = 6;
@@ -230,11 +239,11 @@ function initPixels() {
   indicator.strokeCap = "round";
   indicator.dashArray = [4, 10];
 
-  let bgRect = new Path.Rectangle([0, 0], [pixelSize * 6, pixelSize * 6]);
-  bgRect.fillColor = "#b239ff";
+  //   let bgRect = new Path.Rectangle([200, 200], [pixelSize * 6, pixelSize * 6]);
+  //   bgRect.fillColor = "#b239ff";
 
   pixels = new Group();
-  pixels.addChild(bgRect);
+  //   pixels.addChild(bgRect);
 
   _.range(6 * 6).forEach(function (_val, idx) {
     let x = idx % 6;

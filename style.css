@@ -110,6 +110,9 @@ h3 {
 #col8 + label:after {
   background: #fa3c02;
 }
+#col9 {
+  background: white;
+}
 
 [type="radio"]:not(:checked) + label:after {
   opacity: 0;
